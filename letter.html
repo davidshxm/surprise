@@ -80,26 +80,6 @@
             min-height: 200px;
         }
 
-        .video-container {
-            display: none;
-            position: relative;
-            width: 100%;
-            padding-top: 56.25%; /* 16:9 Aspect Ratio */
-            margin-bottom: 40px;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 0 20px rgba(106, 76, 147, 0.3), 0 0 30px rgba(255, 215, 232, 0.5);
-        }
-
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
         /* Surprise Button */
         .surprise-button-container {
             text-align: center;
@@ -414,16 +394,11 @@
 <body>
     <div class="container">
         <header>
-            <h1>For My Dearest Friend ❤️</h1>
+            <h1>For My Loving Girlfriend ❤️</h1>
         </header>
 
         <div class="letter-container">
             <div class="letter" id="typed-text"></div>
-        </div>
-
-        <div class="video-container" id="video-message">
-            <!-- Replace with your video embed code -->
-            <iframe src="about:blank" frameborder="0" allowfullscreen></iframe>
         </div>
 
         <div class="surprise-button-container">
@@ -439,7 +414,6 @@
         </div>
     </div>
 
-    <!-- Modal for Surprise -->
     <div class="modal-overlay" id="modal-overlay">
         <div class="modal">
             <button class="modal-close" id="modal-close">×</button>
@@ -448,48 +422,19 @@
             </div>
             <div class="modal-body">
                 <div class="playlist">
-                    <h3 style="margin-bottom: 15px;">Songs That Remind Me of Us 💕</h3>
+                    <h3 style="margin-bottom: 15px;">Song I sang for you 💕</h3>
                     <div class="playlist-item">
                         <img src="3.jpg" alt="Song cover">
                         <div class="playlist-item-info">
                             <div class="playlist-item-title">Our Favorite Memory</div>
-                            <div class="playlist-item-artist">That Artist You Love</div>
+                            <div class="playlist-item-artist">David</div>
                         </div>
-                        <button class="playlist-item-play"><i class="fas fa-play"></i></button>
-                    </div>
-                    <div class="playlist-item">
-                        <img src="1.jpg" alt="Song cover">
-                        <div class="playlist-item-info">
-                            <div class="playlist-item-title">That Summer Night</div>
-                            <div class="playlist-item-artist">The Adventure Band</div>
-                        </div>
-                        <button class="playlist-item-play"><i class="fas fa-play"></i></button>
-                    </div>
-                    <div class="playlist-item">
-                        <img src="6.jpg" alt="Song cover">
-                        <div class="playlist-item-info">
-                            <div class="playlist-item-title">Inside Joke Anthem</div>
-                            <div class="playlist-item-artist">Laugh Out Loud</div>
-                        </div>
-                        <button class="playlist-item-play"><i class="fas fa-play"></i></button>
-                    </div>
-                    <div class="playlist-item">
-                        <img src="2.jpeg" alt="Song cover">
-                        <div class="playlist-item-info">
-                            <div class="playlist-item-title">Remember When</div>
-                            <div class="playlist-item-artist">The Friendship Vibes</div>
-                        </div>
-                        <button class="playlist-item-play"><i class="fas fa-play"></i></button>
-                    </div>
-                    <div class="playlist-item">
-                        <img src="5.jpg" alt="Song cover">
-                        <div class="playlist-item-info">
-                            <div class="playlist-item-title">Birthday Wishes</div>
-                            <div class="playlist-item-artist">Happy Songs</div>
-                        </div>
-                        <button class="playlist-item-play"><i class="fas fa-play"></i></button>
+                        <button id="play-custom-song" class="playlist-item-play">
+                            <i class="fas fa-play" id="custom-play-icon"></i>
+                        </button>
                     </div>
                 </div>
+                
                 <div style="margin-top: 20px;">
                     <a href="#" download class="back-button" style="background: #ffb6c1; border-color: #ffb6c1; color: white;">
                         <i class="fas fa-download"></i> Download Your Digital Gift
@@ -499,23 +444,22 @@
         </div>
     </div>
 
-    <!-- Music Controls -->
     <div class="music-controls" id="music-toggle">
         <i class="fas fa-volume-mute" id="music-icon"></i>
     </div>
 
-    <!-- Audio Elements -->
     <audio id="click-sound" preload="auto">
         <source src="https://cdn.pixabay.com/download/audio/2021/08/04/audio_bb630cc098.mp3?filename=cute-notification-ringtone-1-173850.mp3" type="audio/mpeg">
     </audio>
     <audio id="background-music" loop>
         <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a73467.mp3?filename=relaxing-145038.mp3" type="audio/mpeg">
     </audio>
+    <audio id="custom-audio-file" src="Giseles Birthday Present.mp3" preload="auto"></audio>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/canvas-confetti/1.5.1/confetti.browser.min.js"></script>
 
-    <script>
+    <script>    
         document.addEventListener('DOMContentLoaded', function() {
             // Fade in animation
             setTimeout(() => {
@@ -523,10 +467,10 @@
             }, 500);
 
             // Typewriter effect for letter
-            const letterContent = "My dearest friend,\n\nAs I sit here thinking about all our memories together, I can't help but smile. From our late-night talks to our spontaneous adventures, you've filled my life with so much joy and laughter. You've been my shoulder to cry on, my partner in crime, and my biggest supporter.\n\nOn your special day, I want you to know how grateful I am to have you in my life. You make every day brighter just by being you - kind, funny, and incredibly thoughtful.\n\nHappy Birthday to my favorite person in the world! Here's to many more years of friendship, laughter, and creating memories together.\n\nWith all my love,\n[Your Name]";
+            const letterContent = "My wonderful girlfriend,\n\nAs I sit here thinking about all our memories together, I can't help but smile. From our late-night talks to our spontaneous 3 am mcdonald runs, you've filled my life with so much joy and laughter. You've been my shoulder to cry on, my partner in crime, and my biggest supporter.\n\nOn your special day, I want you to know how grateful I am to have you in my life. You make every day brighter just by being you - kind, funny, and incredibly thoughtful.\n\nHappy Birthday to my favorite person in the world! Here's to many more years of love, laughter, and creating memories together.\n\nWith lots of loves and kisses,\nDavid";
             
             new Typed('#typed-text', {
-                strings: [letterContent],
+                strings: [letterContent.replace(/\n/g, '<br>')],
                 typeSpeed: 30,
                 showCursor: true,
                 cursorChar: '|',
@@ -595,6 +539,39 @@
                     musicIcon.classList.add('fa-volume-up');
                 }
                 isMusicPlaying = !isMusicPlaying;
+            });
+
+            // Custom GarageBand Song Controls
+            const customSong = document.getElementById('custom-audio-file');
+            const playCustomBtn = document.getElementById('play-custom-song');
+            const customPlayIcon = document.getElementById('custom-play-icon');
+
+            playCustomBtn.addEventListener('click', function() {
+                if (customSong.paused) {
+                    // Turn off the main background music so they don't clash!
+                    if (!backgroundMusic.paused) {
+                        backgroundMusic.pause();
+                        musicIcon.classList.remove('fa-volume-up');
+                        musicIcon.classList.add('fa-volume-mute');
+                        isMusicPlaying = false; 
+                    }
+                    
+                    // Play the GarageBand song and change icon to pause
+                    customSong.play();
+                    customPlayIcon.classList.remove('fa-play');
+                    customPlayIcon.classList.add('fa-pause');
+                } else {
+                    // Pause the GarageBand song and change icon back to play
+                    customSong.pause();
+                    customPlayIcon.classList.remove('fa-pause');
+                    customPlayIcon.classList.add('fa-play');
+                }
+            });
+
+            // Automatically change the pause icon back to play when the song finishes
+            customSong.addEventListener('ended', function() {
+                customPlayIcon.classList.remove('fa-pause');
+                customPlayIcon.classList.add('fa-play');
             });
 
             // Helper Functions
